@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amsterdam Data Union — Speaker Onboarding</title>
+<style>
+  :root {
+    --pink: #D81B60;
+    --pink-deep: #ad1549;
+    --pink-soft: #f9e8ef;
+    --ink: #1a1a1a;
+    --muted: #6b6b6b;
+    --bg: #ffffff;
+    --card: #faf7f8;
+    --border: #ece3e6;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Top nav ===== */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { max-width: 980px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-brand { display: flex; align-items: center; gap: 10px; }
+  .nav-mark { position: relative; width: 26px; height: 26px; flex: none; }
+  .nav-mark .ring { position: absolute; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--pink); }
+  .nav-mark .r1 { left: 0; top: 4px; }
+  .nav-mark .r2 { right: 0; top: 4px; }
+  .nav-name { font-size: 13px; letter-spacing: 0.1em; font-weight: 700; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 22px; }
+  .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 500; }
+  .nav-links a:hover { color: var(--pink); }
+  .nav-cta {
+    background: var(--pink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 700;
+    padding: 9px 18px; border-radius: 10px;
+  }
+  .nav-cta:hover { background: var(--pink-deep); }
+
+  /* ===== Hero ===== */
+  .hero { background: linear-gradient(160deg, #e0216b 0%, #D81B60 55%, #a9124d 100%); color: #fff; padding: 64px 24px 72px; }
+  .hero-inner { max-width: 980px; margin: 0 auto; }
+  .hero .eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; opacity: .85; margin-bottom: 14px; font-weight: 600; }
+  .hero h1 { font-size: 44px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; margin-bottom: 16px; max-width: 720px; }
+  .hero .sub { font-size: 18px; opacity: .95; max-width: 620px; margin-bottom: 28px; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 22px; font-size: 15px; opacity: .95; }
+  .hero-meta span { display: flex; align-items: center; gap: 7px; }
+
+  /* ===== Sections ===== */
+  section { padding: 56px 24px; }
+  .inner { max-width: 980px; margin: 0 auto; }
+  .kicker { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--pink); margin-bottom: 12px; }
+  section h2 { font-size: 28px; letter-spacing: -0.01em; margin-bottom: 18px; }
+  section p { font-size: 16px; color: var(--muted); max-width: 700px; }
+
+  .alt { background: var(--card); }
+
+  /* Example bio */
+  .example {
+    background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 24px 26px; margin-top: 20px; max-width: 700px;
+  }
+  .example .tag { font-size: 12px; color: var(--muted); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .example p { font-size: 16px; color: #444; font-style: italic; }
+
+  /* Checklist */
+  .check { list-style: none; margin-top: 20px; max-width: 700px; }
+  .check li { padding: 10px 0 10px 34px; position: relative; font-size: 16px; color: var(--ink); border-bottom: 1px solid var(--border); }
+  .check li:last-child { border-bottom: none; }
+  .check li::before {
+    content: "✓"; position: absolute; left: 0; top: 10px; width: 24px; height: 24px;
+    border-radius: 50%; background: var(--pink-soft); color: var(--pink);
+    font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Steps */
+  .steps { list-style: none; counter-reset: step; max-width: 700px; }
+  .steps li { counter-increment: step; position: relative; padding: 16px 0 16px 48px; border-bottom: 1px solid var(--border); font-size: 16px; }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before {
+    content: counter(step); position: absolute; left: 0; top: 16px; width: 32px; height: 32px;
+    border-radius: 50%; background: var(--pink); color: #fff;
+    font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center;
+  }
+
+  /* CTA button */
+  .cta {
+    display: inline-block; background: var(--pink); color: #fff; border: none; border-radius: 12px;
+    padding: 16px 34px; font-size: 17px; font-weight: 700; cursor: pointer;
+    text-decoration: none; margin-top: 28px; transition: background .15s;
+  }
+  .cta:hover { background: var(--pink-deep); }
+
+  /* Footer */
+  footer { background: var(--ink); color: #fff; padding: 40px 24px; }
+  .foot-inner { max-width: 980px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+  .foot-brand { font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+  .foot-meta { font-size: 13px; opacity: .7; }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="nav-mark"><span class="ring r1"></span><span class="ring r2"></span></div>
+        <span class="nav-name">Amsterdam Data Union</span>
+      </div>
+      <div class="nav-links">
+        <a href="#welcome">Welcome</a>
+        <a href="#bio">Your bio</a>
+        <a href="#next">Next steps</a>
+      </div>
+      <a class="nav-cta" id="navCta" href="#">Speaker form →</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Speaker onboarding</div>
+      <h1>Welcome to Amsterdam Data Union</h1>
+      <p class="sub">We're so glad to have you at our event. Here's everything you need to get ready — it takes about two minutes.</p>
+      <div class="hero-meta">
+        <span>📅 October 14, 2026</span>
+        <span>🕕 18:00 CEST</span>
+        <span>📍 Adyen Rokin Office, Amsterdam</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="welcome">
+    <div class="inner">
+      <div class="kicker">Welcome</div>
+      <h2>We're happy to have you</h2>
+      <p>To prepare for the event, we need two quick things from you: a short bio and a photo. Both go into the speaker form below — nothing else to do, no back-and-forth.</p>
+    </div>
+  </section>
+
+  <section id="bio" class="alt">
+    <div class="inner">
+      <div class="kicker">Your bio</div>
+      <h2>How to write it</h2>
+      <p>2–3 sentences, third person, under 200 words. Say what you do, and what you'll share at the event.</p>
+
+      <div class="example">
+        <div class="tag">Example</div>
+        <p>"Alexander Modestov is Head of Analytics at Manychat, where he leads the analytics function and has spent the last year building their in-house agentic setup. He's sharing what they built, why they chose to build over buy, and where it still falls short."</p>
+      </div>
+
+      <ul class="check">
+        <li>A short bio (2–3 sentences, max 200 words)</li>
+        <li>A square, high-res photo (just your face)</li>
+      </ul>
+
+      <a class="cta" id="ctaBtn" href="#" target="_blank">Open the speaker form →</a>
+    </div>
+  </section>
+
+  <section id="next">
+    <div class="inner">
+      <div class="kicker">Next steps</div>
+      <h2>What happens after</h2>
+      <ol class="steps">
+        <li>You'll receive our template panel questions.</li>
+        <li>We'll schedule a 1-hour call with you and the moderator before the event to review your answers.</li>
+        <li>Show up on the day — bring the good vibes, we'll handle the rest.</li>
+        <li>Don't forget to share &amp; invite your network to our event 🙂 <a id="eventLink" href="#" target="_blank">[link]</a></li>
+      </ol>
+      <p style="margin-top:28px; font-size:18px; font-weight:600; color:var(--ink);">See you there ✦</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-inner">
+      <div class="foot-brand">Amsterdam Data Union</div>
+      <div class="foot-meta">October 14, 2026 · 18:00 CEST · Adyen Rokin Office, Amsterdam</div>
+    </div>
+  </footer>
+
+<script>
+  // ============================================================
+  // CONFIG — paste your Google Form URL here (one line per event)
+  // ============================================================
+  const FORM_URL = "https://forms.gle/YOUR_FORM_ID_HERE";
+  const EVENT_URL = "https://www.linkedin.com/event/manage/7505890305284530176/"; // share/invite link
+  const isConfigured = !FORM_URL.includes('YOUR_FORM_ID');
+  const links = [document.getElementById('ctaBtn'), document.getElementById('navCta')];
+  links.forEach(link => {
+    link.href = isConfigured ? FORM_URL : '#';
+    link.addEventListener('click', (e) => {
+      if (!isConfigured) {
+        e.preventDefault();
+        alert('Form link not configured yet — paste your Google Form URL into FORM_URL.');
+      }
+    });
+  });
+  // event share link (step 4)
+  const eventLink = document.getElementById('eventLink');
+  eventLink.href = EVENT_URL;
+</script>
+</body>
+</html>
