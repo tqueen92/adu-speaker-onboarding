@@ -32,7 +32,7 @@
     background: rgba(255,255,255,.92); backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-inner { max-width: 980px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-inner { max-width: 760px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
   .nav-brand { display: flex; align-items: center; gap: 10px; }
   .nav-mark { position: relative; width: 26px; height: 26px; flex: none; }
   .nav-mark .ring { position: absolute; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--pink); }
@@ -42,50 +42,65 @@
   .nav-links { display: flex; gap: 22px; }
   .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 500; }
   .nav-links a:hover { color: var(--pink); }
-  .nav-cta {
-    background: var(--pink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 700;
-    padding: 9px 18px; border-radius: 10px;
-  }
-  .nav-cta:hover { background: var(--pink-deep); }
 
   /* ===== Hero ===== */
-  .hero { background: linear-gradient(160deg, #e0216b 0%, #D81B60 55%, #a9124d 100%); color: #fff; padding: 64px 24px 72px; }
-  .hero-inner { max-width: 980px; margin: 0 auto; }
+  .hero { background: linear-gradient(160deg, #e0216b 0%, #D81B60 55%, #a9124d 100%); color: #fff; padding: 56px 24px 64px; }
+  .hero-inner { max-width: 760px; margin: 0 auto; }
   .hero .eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; opacity: .85; margin-bottom: 14px; font-weight: 600; }
-  .hero h1 { font-size: 44px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; margin-bottom: 16px; max-width: 720px; }
-  .hero .sub { font-size: 18px; opacity: .95; max-width: 620px; margin-bottom: 28px; }
-  .hero-meta { display: flex; flex-wrap: wrap; gap: 22px; font-size: 15px; opacity: .95; }
-  .hero-meta span { display: flex; align-items: center; gap: 7px; }
+  .hero h1 { font-size: 40px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; margin-bottom: 16px; }
+  .hero .sub { font-size: 18px; opacity: .95; max-width: 560px; }
 
-  /* ===== Sections ===== */
-  section { padding: 56px 24px; }
-  .inner { max-width: 980px; margin: 0 auto; }
+  /* ===== Body ===== */
+  section { padding: 48px 24px; }
+  .inner { max-width: 760px; margin: 0 auto; }
   .kicker { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--pink); margin-bottom: 12px; }
-  section h2 { font-size: 28px; letter-spacing: -0.01em; margin-bottom: 18px; }
-  section p { font-size: 16px; color: var(--muted); max-width: 700px; }
-
+  section h2 { font-size: 28px; letter-spacing: -0.01em; margin-bottom: 14px; }
   .alt { background: var(--card); }
 
-  /* Example bio */
-  .example {
-    background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 24px 26px; margin-top: 20px; max-width: 700px;
+  /* Action highlight */
+  .action-card {
+    background: #fff; border: 2px solid var(--pink); border-radius: var(--radius);
+    padding: 28px 26px; margin-top: 20px;
   }
-  .example .tag { font-size: 12px; color: var(--muted); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-  .example p { font-size: 16px; color: #444; font-style: italic; }
+  .action-card .title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .action-card .desc { font-size: 15px; color: var(--muted); margin-bottom: 20px; }
 
-  /* Checklist */
-  .check { list-style: none; margin-top: 20px; max-width: 700px; }
-  .check li { padding: 10px 0 10px 34px; position: relative; font-size: 16px; color: var(--ink); border-bottom: 1px solid var(--border); }
-  .check li:last-child { border-bottom: none; }
-  .check li::before {
-    content: "✓"; position: absolute; left: 0; top: 10px; width: 24px; height: 24px;
-    border-radius: 50%; background: var(--pink-soft); color: var(--pink);
-    font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center;
+  /* Example */
+  .example {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 20px; margin-bottom: 22px;
   }
+  .example .tag { font-size: 11px; color: var(--muted); margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .example p { font-size: 15px; color: #444; font-style: italic; }
+
+  /* Form */
+  form { display: flex; flex-direction: column; gap: 16px; }
+  label { font-size: 14px; font-weight: 600; display: block; margin-bottom: 6px; }
+  input[type="text"], textarea {
+    width: 100%; border: 1.5px solid var(--border); border-radius: 10px;
+    padding: 12px 14px; font-size: 15px; font-family: inherit; color: var(--ink);
+    background: #fff; transition: border-color .15s;
+  }
+  input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--pink); }
+  textarea { min-height: 130px; resize: vertical; }
+  .hint { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .wordcount { font-size: 13px; color: var(--muted); text-align: right; }
+
+  .photo-zone {
+    border: 2px dashed var(--border); border-radius: 12px; padding: 22px;
+    text-align: center; color: var(--muted); cursor: pointer; transition: border-color .15s;
+  }
+  .photo-zone:hover { border-color: var(--pink); }
+
+  button {
+    background: var(--pink); color: #fff; border: none; border-radius: 12px;
+    padding: 15px 28px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%;
+    transition: background .15s;
+  }
+  button:hover { background: var(--pink-deep); }
 
   /* Steps */
-  .steps { list-style: none; counter-reset: step; max-width: 700px; }
+  .steps { list-style: none; counter-reset: step; }
   .steps li { counter-increment: step; position: relative; padding: 16px 0 16px 48px; border-bottom: 1px solid var(--border); font-size: 16px; }
   .steps li:last-child { border-bottom: none; }
   .steps li::before {
@@ -93,20 +108,14 @@
     border-radius: 50%; background: var(--pink); color: #fff;
     font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center;
   }
+  .steps li a { color: var(--pink); font-weight: 600; }
 
-  /* CTA button */
-  .cta {
-    display: inline-block; background: var(--pink); color: #fff; border: none; border-radius: 12px;
-    padding: 16px 34px; font-size: 17px; font-weight: 700; cursor: pointer;
-    text-decoration: none; margin-top: 28px; transition: background .15s;
-  }
-  .cta:hover { background: var(--pink-deep); }
+  .closing { margin-top: 32px; font-size: 18px; font-weight: 600; }
 
   /* Footer */
-  footer { background: var(--ink); color: #fff; padding: 40px 24px; }
-  .foot-inner { max-width: 980px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+  footer { background: var(--ink); color: #fff; padding: 36px 24px; }
+  .foot-inner { max-width: 760px; margin: 0 auto; }
   .foot-brand { font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
-  .foot-meta { font-size: 13px; opacity: .7; }
 
   @media (max-width: 640px) {
     .nav-links { display: none; }
@@ -123,11 +132,9 @@
         <span class="nav-name">Amsterdam Data Union</span>
       </div>
       <div class="nav-links">
-        <a href="#welcome">Welcome</a>
         <a href="#bio">Your bio</a>
         <a href="#next">Next steps</a>
       </div>
-      <a class="nav-cta" id="navCta" href="#">Speaker form →</a>
     </div>
   </nav>
 
@@ -135,61 +142,66 @@
     <div class="hero-inner">
       <div class="eyebrow">Speaker onboarding</div>
       <h1>Welcome to Amsterdam Data Union</h1>
-      <p class="sub">We're so glad to have you at our event. Here's everything you need to get ready — it takes about two minutes.</p>
-      <div class="hero-meta">
-        <span>📅 October 14, 2026</span>
-        <span>🕕 18:00 CEST</span>
-        <span>📍 Adyen Rokin Office, Amsterdam</span>
-      </div>
+      <p class="sub">We're so glad to have you at our event. To get everything ready, we need two quick things from you — this takes about two minutes.</p>
     </div>
   </div>
 
-  <section id="welcome">
+  <section id="bio">
     <div class="inner">
-      <div class="kicker">Welcome</div>
-      <h2>We're happy to have you</h2>
-      <p>To prepare for the event, we need two quick things from you: a short bio and a photo. Both go into the speaker form below — nothing else to do, no back-and-forth.</p>
-    </div>
-  </section>
+      <div class="kicker">Your bio &amp; photo</div>
+      <h2>Let's get you set up</h2>
 
-  <section id="bio" class="alt">
-    <div class="inner">
-      <div class="kicker">Your bio</div>
-      <h2>How to write it</h2>
-      <p>2–3 sentences, third person, under 200 words. Say what you do, and what you'll share at the event.</p>
+      <div class="action-card">
+        <div class="title">We need two quick things from you 👇</div>
+        <div class="desc">A short bio and a photo. Fill these in, hit submit, and you're done.</div>
 
-      <div class="example">
-        <div class="tag">Example</div>
-        <p>"Alexander Modestov is Head of Analytics at Manychat, where he leads the analytics function and has spent the last year building their in-house agentic setup. He's sharing what they built, why they chose to build over buy, and where it still falls short."</p>
+        <div class="example">
+          <div class="tag">Example bio</div>
+          <p>"Alexander Modestov is Head of Analytics at Manychat, where he leads the analytics function and has spent the last year building their in-house agentic setup. He's sharing what they built, why they chose to build over buy, and where it still falls short."</p>
+        </div>
+
+        <form id="bioForm">
+          <div>
+            <label for="name">Your name</label>
+            <input type="text" id="name" placeholder="Firstname Lastname">
+          </div>
+          <div>
+            <label for="role">Company &amp; role</label>
+            <input type="text" id="role" placeholder="Head of Analytics · Manychat">
+          </div>
+          <div>
+            <label for="bio">Your bio</label>
+            <textarea id="bio" placeholder="2–3 sentences, third person. What you do, and what you'll share at the event."></textarea>
+            <div class="hint">Under <strong>200 words</strong>.</div>
+            <div class="wordcount" id="wc">0 words</div>
+          </div>
+          <div>
+            <label>Your photo</label>
+            <div class="photo-zone" id="photoZone">📷 Tap to add a photo (square, high-res, just your face)</div>
+          </div>
+          <button type="submit" id="submitBtn">Submit</button>
+        </form>
       </div>
-
-      <ul class="check">
-        <li>A short bio (2–3 sentences, max 200 words)</li>
-        <li>A square, high-res photo (just your face)</li>
-      </ul>
-
-      <a class="cta" id="ctaBtn" href="#" target="_blank">Open the speaker form →</a>
     </div>
   </section>
 
-  <section id="next">
+  <section id="next" class="alt">
     <div class="inner">
       <div class="kicker">Next steps</div>
       <h2>What happens after</h2>
       <ol class="steps">
+        <li>Don't forget to share &amp; invite your network to our event 🙂 <a id="eventLink" href="#" target="_blank">[link]</a></li>
         <li>You'll receive our template panel questions.</li>
         <li>We'll schedule a 1-hour call with you and the moderator before the event to review your answers.</li>
         <li>Show up on the day — bring the good vibes, we'll handle the rest.</li>
-        <li>Don't forget to share &amp; invite your network to our event 🙂 <a id="eventLink" href="#" target="_blank">[link]</a></li>
       </ol>
-      <p style="margin-top:28px; font-size:18px; font-weight:600; color:var(--ink);">See you there ✦</p>
+      <p class="closing">See you there ✦</p>
     </div>
   </section>
 
   <footer>
     <div class="foot-inner">
       <div class="foot-brand">Amsterdam Data Union</div>
-      <div class="foot-meta">October 14, 2026 · 18:00 CEST · Adyen Rokin Office, Amsterdam</div>
     </div>
   </footer>
 
@@ -200,19 +212,32 @@
   const FORM_URL = "https://forms.gle/YOUR_FORM_ID_HERE";
   const EVENT_URL = "https://www.linkedin.com/event/manage/7505890305284530176/"; // share/invite link
   const isConfigured = !FORM_URL.includes('YOUR_FORM_ID');
-  const links = [document.getElementById('ctaBtn'), document.getElementById('navCta')];
-  links.forEach(link => {
-    link.href = isConfigured ? FORM_URL : '#';
-    link.addEventListener('click', (e) => {
-      if (!isConfigured) {
-        e.preventDefault();
-        alert('Form link not configured yet — paste your Google Form URL into FORM_URL.');
-      }
-    });
+
+  // Submit → open the Google Form (which collects the bio + photo)
+  document.getElementById('submitBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!isConfigured) {
+      alert('Form link not configured yet — paste your Google Form URL into FORM_URL.');
+      return;
+    }
+    window.open(FORM_URL, '_blank');
   });
-  // event share link (step 4)
-  const eventLink = document.getElementById('eventLink');
-  eventLink.href = EVENT_URL;
+  document.getElementById('photoZone').addEventListener('click', () => {
+    if (!isConfigured) { alert('Form link not configured yet.'); return; }
+    window.open(FORM_URL, '_blank');
+  });
+
+  // event share link
+  document.getElementById('eventLink').href = EVENT_URL;
+
+  // word counter
+  const bio = document.getElementById('bio');
+  const wc = document.getElementById('wc');
+  bio.addEventListener('input', () => {
+    const words = bio.value.trim() ? bio.value.trim().split(/\s+/).length : 0;
+    wc.textContent = words + ' words';
+    wc.style.color = words > 200 ? '#c0392b' : '';
+  });
 </script>
 </body>
 </html>
