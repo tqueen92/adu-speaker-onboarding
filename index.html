@@ -3,21 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amsterdam Data Union — Speaker Onboarding</title>
+<title>Amsterdam Data Union | Welcome, speakers and moderators</title>
 <style>
   :root {
     --pink: #D81B60;
     --pink-deep: #ad1549;
     --pink-soft: #f9e8ef;
     --ink: #1a1a1a;
-    --muted: #6b6b6b;
+    --muted: #5f5f5f;
     --bg: #ffffff;
     --card: #faf7f8;
     --border: #ece3e6;
     --radius: 16px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--ink);
@@ -25,218 +24,172 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
+  a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 
-  /* ===== Top nav ===== */
-  nav {
-    position: sticky; top: 0; z-index: 10;
-    background: rgba(255,255,255,.92); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-inner { max-width: 760px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
-  .nav-brand { display: flex; align-items: center; gap: 10px; }
-  .nav-mark { position: relative; width: 26px; height: 26px; flex: none; }
-  .nav-mark .ring { position: absolute; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--pink); }
-  .nav-mark .r1 { left: 0; top: 4px; }
-  .nav-mark .r2 { right: 0; top: 4px; }
-  .nav-name { font-size: 13px; letter-spacing: 0.1em; font-weight: 700; text-transform: uppercase; }
-  .nav-links { display: flex; gap: 22px; }
-  .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 500; }
-  .nav-links a:hover { color: var(--pink); }
+  /* Brand bar */
+  .brand-bar { border-bottom: 1px solid var(--border); }
+  .brand-inner { max-width: 760px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 10px; }
+  .mark { position: relative; width: 26px; height: 26px; flex: none; }
+  .mark .ring { position: absolute; top: 4px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--pink); }
+  .mark .r1 { left: 0; }
+  .mark .r2 { right: 0; }
+  .brand-name { font-size: 15px; font-weight: 700; }
 
-  /* ===== Hero ===== */
-  .hero { background: linear-gradient(160deg, #e0216b 0%, #D81B60 55%, #a9124d 100%); color: #fff; padding: 56px 24px 64px; }
+  /* Hero */
+  .hero { background: linear-gradient(160deg, #e0216b 0%, #D81B60 55%, #a9124d 100%); color: #fff; padding: 56px 24px 48px; }
   .hero-inner { max-width: 760px; margin: 0 auto; }
-  .hero .eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; opacity: .85; margin-bottom: 14px; font-weight: 600; }
   .hero h1 { font-size: 40px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; margin-bottom: 16px; }
-  .hero .sub { font-size: 18px; opacity: .95; max-width: 560px; }
+  .hero p { font-size: 18px; max-width: 560px; margin-bottom: 28px; }
 
-  /* ===== Body ===== */
+  /* Buttons */
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 700; font-size: 16px;
+    border-radius: 12px; padding: 15px 28px; transition: background .15s;
+  }
+  .btn-pink { background: var(--pink); color: #fff; }
+  .btn-pink:hover { background: var(--pink-deep); }
+  .hero { position: relative; }
+  .hero .promise { font-size: 16px; font-weight: 600; margin-bottom: 0; }
+  .next .arrow { display: inline-block; animation: nudge 1.2s ease-in-out 1s 3; }
+  @keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+  @media (prefers-reduced-motion: reduce) { .next .arrow { animation: none; } }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  /* Sections */
   section { padding: 48px 24px; }
+  section { position: relative; }
+  section.alt { background: var(--card); }
+  .next {
+    position: absolute; left: 50%; bottom: -20px; transform: translateX(-50%); z-index: 1;
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff; border: 2px solid var(--pink); color: var(--pink);
+    font-size: 18px; font-weight: 700; text-decoration: none; transition: background .15s, color .15s;
+  }
+  .next:hover { background: var(--pink); color: #fff; }
   .inner { max-width: 760px; margin: 0 auto; }
-  .kicker { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--pink); margin-bottom: 12px; }
-  section h2 { font-size: 28px; letter-spacing: -0.01em; margin-bottom: 14px; }
-  .alt { background: var(--card); }
-
-  /* Action highlight */
-  .action-card {
-    background: #fff; border: 2px solid var(--pink); border-radius: var(--radius);
-    padding: 28px 26px; margin-top: 20px;
-  }
-  .action-card .title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-  .action-card .desc { font-size: 15px; color: var(--muted); margin-bottom: 20px; }
-
-  /* Example */
-  .example {
-    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 18px 20px; margin-bottom: 22px;
-  }
-  .example .tag { font-size: 11px; color: var(--muted); margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-  .example p { font-size: 15px; color: #444; font-style: italic; }
-
-  /* Form */
-  form { display: flex; flex-direction: column; gap: 16px; }
-  label { font-size: 14px; font-weight: 600; display: block; margin-bottom: 6px; }
-  input[type="text"], textarea {
-    width: 100%; border: 1.5px solid var(--border); border-radius: 10px;
-    padding: 12px 14px; font-size: 15px; font-family: inherit; color: var(--ink);
-    background: #fff; transition: border-color .15s;
-  }
-  input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--pink); }
-  textarea { min-height: 130px; resize: vertical; }
-  .hint { font-size: 13px; color: var(--muted); margin-top: 4px; }
-  .wordcount { font-size: 13px; color: var(--muted); text-align: right; }
-
-  .photo-zone {
-    border: 2px dashed var(--border); border-radius: 12px; padding: 22px;
-    text-align: center; color: var(--muted); cursor: pointer; transition: border-color .15s;
-  }
-  .photo-zone:hover { border-color: var(--pink); }
-
-  button {
-    background: var(--pink); color: #fff; border: none; border-radius: 12px;
-    padding: 15px 28px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%;
-    transition: background .15s;
-  }
-  button:hover { background: var(--pink-deep); }
+  section h2 { font-size: 26px; letter-spacing: -0.01em; margin-bottom: 12px; }
+  section p { font-size: 17px; }
+  section p + p { margin-top: 12px; }
+  .share { font-weight: 600; }
 
   /* Steps */
-  .steps { list-style: none; counter-reset: step; }
-  .steps li { counter-increment: step; position: relative; padding: 16px 0 16px 48px; border-bottom: 1px solid var(--border); font-size: 16px; }
+  .steps { list-style: none; counter-reset: step; margin-top: 8px; }
+  .steps li { counter-increment: step; position: relative; padding: 16px 0 16px 48px; border-bottom: 1px solid var(--border); font-size: 17px; }
   .steps li:last-child { border-bottom: none; }
   .steps li::before {
     content: counter(step); position: absolute; left: 0; top: 16px; width: 32px; height: 32px;
     border-radius: 50%; background: var(--pink); color: #fff;
     font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center;
   }
-  .steps li a { color: var(--pink); font-weight: 600; }
 
-  .closing { margin-top: 32px; font-size: 18px; font-weight: 600; }
-
-  /* Footer */
-  footer { background: var(--ink); color: #fff; padding: 36px 24px; }
-  .foot-inner { max-width: 760px; margin: 0 auto; }
-  .foot-brand { font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+  /* Get started */
+  .start-card { border: 2px solid var(--pink); border-radius: var(--radius); padding: 28px 26px; }
+  .start-card h2 { margin-bottom: 8px; }
+  .ready { list-style: none; margin: 16px 0 20px; }
+  .ready li { padding: 6px 0 6px 26px; position: relative; font-size: 16px; }
+  .ready li::before { content: ""; position: absolute; left: 4px; top: 15px; width: 8px; height: 8px; border-radius: 50%; background: var(--pink); }
+  .example { background: var(--card); border-left: 3px solid var(--pink); border-radius: 8px; padding: 16px 18px; margin-bottom: 24px; }
+  .example .tag { font-size: 13px; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+  .example p { font-size: 15px; color: #444; font-style: italic; }
 
   @media (max-width: 640px) {
-    .nav-links { display: none; }
     .hero h1 { font-size: 32px; }
+    .btn { display: block; text-align: center; }
   }
 </style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-inner">
-      <div class="nav-brand">
-        <div class="nav-mark"><span class="ring r1"></span><span class="ring r2"></span></div>
-        <span class="nav-name">Amsterdam Data Union</span>
-      </div>
-      <div class="nav-links">
-        <a href="#bio">Your bio</a>
-        <a href="#next">Next steps</a>
-      </div>
-    </div>
-  </nav>
-
-  <div class="hero">
-    <div class="hero-inner">
-      <div class="eyebrow">Speaker onboarding</div>
-      <h1>Welcome to Amsterdam Data Union</h1>
-      <p class="sub">We're so glad to have you at our event. To get everything ready, we need two quick things from you — this takes about two minutes.</p>
+  <div class="brand-bar">
+    <div class="brand-inner">
+      <div class="mark" aria-hidden="true"><span class="ring r1"></span><span class="ring r2"></span></div>
+      <span class="brand-name">Amsterdam Data Union</span>
     </div>
   </div>
 
-  <section id="bio">
-    <div class="inner">
-      <div class="kicker">Your bio &amp; photo</div>
-      <h2>Let's get you set up</h2>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Welcome to Amsterdam Data Union</h1>
+      <p>You're part of our next event. Here's how it works and what happens next.</p>
+      <p class="promise">One minute to read. One short form at the end, and you're done.</p>
+    </div>
+    <a class="next" href="#about" aria-label="Start reading"><span class="arrow" aria-hidden="true">↓</span></a>
+  </header>
 
-      <div class="action-card">
-        <div class="title">We need two quick things from you 👇</div>
-        <div class="desc">A short bio and a photo. Fill these in, hit submit, and you're done.</div>
-
-        <div class="example">
-          <div class="tag">Example bio</div>
-          <p>"Alexander Modestov is Head of Analytics at Manychat, where he leads the analytics function and has spent the last year building their in-house agentic setup. He's sharing what they built, why they chose to build over buy, and where it still falls short."</p>
-        </div>
-
-        <form id="bioForm">
-          <div>
-            <label for="name">Your name</label>
-            <input type="text" id="name" placeholder="Firstname Lastname">
-          </div>
-          <div>
-            <label for="role">Company &amp; role</label>
-            <input type="text" id="role" placeholder="Head of Analytics · Manychat">
-          </div>
-          <div>
-            <label for="bio">Your bio</label>
-            <textarea id="bio" placeholder="2–3 sentences, third person. What you do, and what you'll share at the event."></textarea>
-            <div class="hint">Under <strong>200 words</strong>.</div>
-            <div class="wordcount" id="wc">0 words</div>
-          </div>
-          <div>
-            <label>Your photo</label>
-            <div class="photo-zone" id="photoZone">📷 Tap to add a photo (square, high-res, just your face)</div>
-          </div>
-          <button type="submit" id="submitBtn">Submit</button>
-        </form>
+  <main>
+    <section id="about">
+      <div class="inner">
+        <h2>About ADU</h2>
+        <p>Amsterdam Data Union is a curated community of medior and senior data professionals in the Netherlands. We host in-person events where practitioners share what actually works: real implementations, honest lessons, no product pitches.</p>
       </div>
-    </div>
-  </section>
+      <a class="next" href="#why" aria-label="Next: Why we introduce you">↓</a>
+    </section>
 
-  <section id="next" class="alt">
-    <div class="inner">
-      <div class="kicker">Next steps</div>
-      <h2>What happens after</h2>
-      <ol class="steps">
-        <li>Don't forget to share &amp; invite your network to our event 🙂 <a id="eventLink" href="#" target="_blank">[link]</a></li>
-        <li>You'll receive our template panel questions.</li>
-        <li>We'll schedule a 1-hour call with you and the moderator before the event to review your answers.</li>
-        <li>Show up on the day — bring the good vibes, we'll handle the rest.</li>
-      </ol>
-      <p class="closing">See you there ✦</p>
-    </div>
-  </section>
+    <section id="why" class="alt">
+      <div class="inner">
+        <h2>Why we introduce you</h2>
+        <p>Our events are only as good as the people who make them: the speakers and the moderator. That's why we introduce you to the community, so people know who you are, what you do, and why your perspective matters.</p>
+        <p class="share">Share the event on LinkedIn and tag us. We'll repost it so more people see it.</p>
+      </div>
+      <a class="next" href="#how" aria-label="Next: How it works">↓</a>
+    </section>
 
-  <footer>
-    <div class="foot-inner">
-      <div class="foot-brand">Amsterdam Data Union</div>
-    </div>
-  </footer>
+    <section id="how">
+      <div class="inner">
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li>Fill in the form with a short bio and a photo. We use them for the event announcement.</li>
+          <li>We'll schedule one-hour prep calls to walk through the panel questions. Speakers join one call. The moderator joins every speaker's call.</li>
+          <li>On the day, speakers share their story, the moderator guides the conversation, and we finish with an open Q&amp;A.</li>
+        </ol>
+      </div>
+      <a class="next" href="#share" aria-label="Next: What we share">↓</a>
+    </section>
+
+    <section id="share" class="alt">
+      <div class="inner">
+        <h2>What we share</h2>
+        <p>Before we post about what you said, we check it with you.</p>
+      </div>
+      <a class="next" href="#start" aria-label="Next: Ready to get started">↓</a>
+    </section>
+
+    <section id="start">
+      <div class="inner">
+        <div class="start-card">
+          <h2>Ready to get started?</h2>
+          <p>It takes about 2 minutes. Once we have your bio and photo, we can start announcing you.</p>
+          <p>Have these ready before you open the form:</p>
+          <ul class="ready">
+            <li>Your name, company and role</li>
+            <li>A short bio, written in third person</li>
+            <li>A photo, or we can use your LinkedIn photo</li>
+          </ul>
+          <div class="example">
+            <div class="tag">Example bio</div>
+            <p>"David Robinson Hayes is a Senior Engineering Manager (Data &amp; ML) at Catawiki, where he leads the team building the data platforms, services, and APIs that power analytics and machine learning across the company. With a background spanning data engineering, ML platforms, and distributed systems, David has worked across a range of industries and technical domains, from real-time data systems through to large-scale ML infrastructure."</p>
+          </div>
+          <a class="btn btn-pink form-link" href="#" target="_blank" rel="noopener">Complete the form →</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
 <script>
-  // ============================================================
-  // CONFIG — paste your Google Form URL here (one line per event)
-  // ============================================================
-  const FORM_URL = "https://forms.gle/YOUR_FORM_ID_HERE";
-  const EVENT_URL = "https://www.linkedin.com/event/manage/7505890305284530176/"; // share/invite link
-  const isConfigured = !FORM_URL.includes('YOUR_FORM_ID');
+  // Paste your Google Form link here. Both buttons use it.
+  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfSvw2xM7rJTqROPik_JXZZOsdT2oZM_xv-nFDO0DShMkc-5w/viewform";
 
-  // Submit → open the Google Form (which collects the bio + photo)
-  document.getElementById('submitBtn').addEventListener('click', (e) => {
-    e.preventDefault();
-    if (!isConfigured) {
-      alert('Form link not configured yet — paste your Google Form URL into FORM_URL.');
-      return;
+  document.querySelectorAll('.form-link').forEach(function (a) {
+    if (FORM_URL.includes('YOUR_FORM_ID')) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        alert('Form link not set yet. Paste the Google Form link into FORM_URL in index.html.');
+      });
+    } else {
+      a.href = FORM_URL;
     }
-    window.open(FORM_URL, '_blank');
-  });
-  document.getElementById('photoZone').addEventListener('click', () => {
-    if (!isConfigured) { alert('Form link not configured yet.'); return; }
-    window.open(FORM_URL, '_blank');
-  });
-
-  // event share link
-  document.getElementById('eventLink').href = EVENT_URL;
-
-  // word counter
-  const bio = document.getElementById('bio');
-  const wc = document.getElementById('wc');
-  bio.addEventListener('input', () => {
-    const words = bio.value.trim() ? bio.value.trim().split(/\s+/).length : 0;
-    wc.textContent = words + ' words';
-    wc.style.color = words > 200 ? '#c0392b' : '';
   });
 </script>
 </body>
