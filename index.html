@@ -75,7 +75,9 @@
   .share { font-weight: 600; }
 
   /* Steps */
-  .steps { list-style: none; counter-reset: step; margin-top: 8px; }
+  .phase { font-size: 15px; font-weight: 700; color: var(--pink); text-transform: uppercase; letter-spacing: 0.08em; margin: 24px 0 4px; }
+  .phase:first-of-type { margin-top: 8px; }
+  .steps { list-style: none; margin-top: 4px; }
   .steps li { counter-increment: step; position: relative; padding: 16px 0 16px 48px; border-bottom: 1px solid var(--border); font-size: 17px; }
   .steps li:last-child { border-bottom: none; }
   .steps li::before {
@@ -129,9 +131,8 @@
 
     <section id="why" class="alt">
       <div class="inner">
-        <h2>Why we introduce you</h2>
+        <h2>You are important ⭐️</h2>
         <p>Our events are only as good as the people who make them: the speakers and the moderator. That's why we introduce you to the community, so people know who you are, what you do, and why your perspective matters.</p>
-        <p class="share">Share the event on LinkedIn and tag us. We'll repost it so more people see it.</p>
       </div>
       <a class="next" href="#how" aria-label="Next: How it works">↓</a>
     </section>
@@ -139,19 +140,27 @@
     <section id="how">
       <div class="inner">
         <h2>How it works</h2>
-        <ol class="steps">
-          <li>Fill in the form with a short bio and a photo. We use them for the event announcement.</li>
-          <li>We'll schedule one-hour prep calls to walk through the panel questions. Speakers join one call. The moderator joins every speaker's call.</li>
-          <li>On the day, speakers share their story, the moderator guides the conversation, and we finish with an open Q&amp;A.</li>
-        </ol>
-      </div>
-      <a class="next" href="#share" aria-label="Next: What we share">↓</a>
-    </section>
 
-    <section id="share" class="alt">
-      <div class="inner">
-        <h2>What we share</h2>
-        <p>Before we post about what you said, we check it with you.</p>
+        <div class="phases" style="counter-reset: step;">
+
+        <h3 class="phase">Before the event</h3>
+        <ol class="steps">
+          <li>Fill in the form with a short bio and a photo.</li>
+          <li>Share the event to your network.</li>
+          <li>We'll schedule one-hour prep calls to walk through the panel questions. Speakers join one call. The moderator joins every speaker's call.</li>
+        </ol>
+
+        <h3 class="phase">During the event</h3>
+        <ol class="steps">
+          <li>Be at the venue for the panel discussion. No video recordings.</li>
+        </ol>
+
+        <h3 class="phase">After the event</h3>
+        <ol class="steps">
+          <li>After checking with you, we publish the key takeaways from the discussion with the community.</li>
+        </ol>
+
+        </div>
       </div>
       <a class="next" href="#start" aria-label="Next: Ready to get started">↓</a>
     </section>
@@ -161,15 +170,9 @@
         <div class="start-card">
           <h2>Ready to get started?</h2>
           <p>It takes about 2 minutes. Once we have your bio and photo, we can start announcing you.</p>
-          <p>Have these ready before you open the form:</p>
-          <ul class="ready">
-            <li>Your name, company and role</li>
-            <li>A short bio, written in third person</li>
-            <li>A photo, or we can use your LinkedIn photo</li>
-          </ul>
           <div class="example">
             <div class="tag">Example bio</div>
-            <p>"David Robinson Hayes is a Senior Engineering Manager (Data &amp; ML) at Catawiki, where he leads the team building the data platforms, services, and APIs that power analytics and machine learning across the company. With a background spanning data engineering, ML platforms, and distributed systems, David has worked across a range of industries and technical domains, from real-time data systems through to large-scale ML infrastructure."</p>
+            <p>"Melanie Mueller is a Product Manager for the in-house experimentation platform at Booking.com, where the central experimentation team supports 400 product teams running around 1,000 A/B tests at any given time. Originally a scientist, Melanie started at Booking.com as a data scientist running experiments for accommodation ranking and pricing, before moving into product ownership on the experimentation platform."</p>
           </div>
           <a class="btn btn-pink form-link" href="#" target="_blank" rel="noopener">Complete the form →</a>
         </div>
