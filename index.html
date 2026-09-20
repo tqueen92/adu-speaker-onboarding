@@ -250,12 +250,14 @@
     })
     .then(function () {
       f.reset();
-      say("Thanks! We'll be in touch soon.", 'ok');
+      say('Thanks! Your message is sent. We will get back to you soon.', 'ok');
       timer = setTimeout(function () { say(''); }, 10000);
     })
     .catch(function () {
+      say('Something went wrong. Please try again in a moment.', 'err');
+    })
+    .then(function () {
       btn.disabled = false;
-      say('Something went wrong. Please try again.', 'err');
     });
   });
 </script>
