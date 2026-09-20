@@ -207,7 +207,7 @@
   </main>
 
 <script>
-  // Google Form is embedded: the site POSTs to Google's endpoint invisibly.
+  // Google Form connection. Fill these in from the pre-filled link.
   var GOOGLE_FORM = {
     id: '1FAIpQLSfSvw2xM7rJTqROPik_JXZZOsdT2oZM_xv-nFDO0DShMkc-5w',
     fields: {
@@ -218,50 +218,39 @@
       photo: 'entry.647609785'
     }
   };
-
-  var f = document.querySelector('.cform');
-  var btn = f.querySelector('button[type="submit"]');
-  var status = f.querySelector('.cstatus');
-  var timer = null;
-
-  function say(msg, cls) {
-    clearTimeout(timer);
-    status.textContent = msg;
-    status.className = 'cstatus ' + (cls || '');
-  }
-
-  // Start clean on every page load (browsers restore cached copies).
-  window.addEventListener('pageshow', function () { f.reset(); say(''); });
-
-  f.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (GOOGLE_FORM.id.indexOf('PASTE') === 0) { say('The form is not connected yet.', 'err'); return; }
-
-    var data = new URLSearchParams();
-    Object.keys(GOOGLE_FORM.fields).forEach(function (k) {
-      var el = f.elements[k];
-      var v = el ? el.value.trim() : '';
-      data.append(GOOGLE_FORM.fields[k], v);
+  (function () {
+    var f = document.querySelector('.cform'); if (!f) return;
+    var status = f.querySelector('.cstatus'), btn = f.querySelector('button');
+    var timer = null;
+    function say(msg, cls) { clearTimeout(timer); status.textContent = msg; status.className = 'cstatus ' + (cls || ''); }
+    function clearStatus() { if (!btn.disabled) say(''); }
+    // Start clean on every page load, including when the browser restores the page from its cache
+    window.addEventListener('pageshow', function () { f.reset(); clearStatus(); });
+    // Hide the old status as soon as someone starts typing again
+    f.addEventListener('input', clearStatus);
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var bad = null;
+      Array.prototype.forEach.call(f.elements, function (el) {
+        if (!el.name) return;
+        var ok = el.checkValidity();
+        el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+        if (!ok && !bad) bad = el;
+      });
+      if (bad) { say('Please fill in your name and a bio.', 'err'); bad.focus(); return; }
+      if (GOOGLE_FORM.id.indexOf('PASTE') === 0) { say('The form is not connected yet.', 'err'); return; }
+      var data = new URLSearchParams();
+      Object.keys(GOOGLE_FORM.fields).forEach(function (k) {
+        var v = f.elements[k].value.trim();
+        data.append(GOOGLE_FORM.fields[k], v);
+      });
+      btn.disabled = true; say('Sending…');
+      fetch('https://docs.google.com/forms/d/e/' + GOOGLE_FORM.id + '/formResponse', { method: 'POST', mode: 'no-cors', body: data })
+        .then(function () { f.reset(); say('Thanks! Your message is sent. We will get back to you soon.', 'ok'); timer = setTimeout(function () { say(''); }, 10000); })
+        .catch(function () { say('Something went wrong. Please try again in a moment.', 'err'); })
+        .then(function () { btn.disabled = false; });
     });
-
-    btn.disabled = true;
-    say('Sending…');
-
-    fetch('https://docs.google.com/forms/d/e/' + GOOGLE_FORM.id + '/formResponse', {
-      method: 'POST', mode: 'no-cors', body: data
-    })
-    .then(function () {
-      f.reset();
-      say('Thanks! Your message is sent. We will get back to you soon.', 'ok');
-      timer = setTimeout(function () { say(''); }, 10000);
-    })
-    .catch(function () {
-      say('Something went wrong. Please try again in a moment.', 'err');
-    })
-    .then(function () {
-      btn.disabled = false;
-    });
-  });
+  })();
 </script>
 </body>
 </html>
