@@ -96,6 +96,20 @@
   .example .tag { font-size: 13px; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
   .example p { font-size: 15px; color: #444; font-style: italic; }
 
+  /* Embedded form */
+  .cform { display: flex; flex-direction: column; gap: 16px; }
+  .cform label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .cform input[type="text"], .cform textarea {
+    width: 100%; border: 1.5px solid var(--border); border-radius: 10px;
+    padding: 12px 14px; font-size: 16px; font-family: inherit; color: var(--ink);
+    background: #fff; transition: border-color .15s;
+  }
+  .cform input[type="text"]:focus, .cform textarea:focus { outline: none; border-color: var(--pink); }
+  .cform textarea { min-height: 130px; resize: vertical; }
+  .cstatus { font-size: 15px; margin-top: 4px; min-height: 22px; }
+  .cstatus.ok { color: #1a7f37; }
+  .cstatus.err { color: #c0392b; }
+
   @media (max-width: 640px) {
     .hero h1 { font-size: 32px; }
     .btn { display: block; text-align: center; }
@@ -170,29 +184,79 @@
         <div class="start-card">
           <h2>Ready to get started?</h2>
           <p>It takes about 2 minutes. Once we have your bio and photo, we can start announcing you.</p>
-          <div class="example">
-            <div class="tag">Example bio</div>
-            <p>"Melanie Mueller is a Product Manager for the in-house experimentation platform at Booking.com, where the central experimentation team supports 400 product teams running around 1,000 A/B tests at any given time. Originally a scientist, Melanie started at Booking.com as a data scientist running experiments for accommodation ranking and pricing, before moving into product ownership on the experimentation platform."</p>
-          </div>
-          <a class="btn btn-pink form-link" href="#" target="_blank" rel="noopener">Complete the form →</a>
+          <form class="cform" novalidate>
+            <label>Name<input name="name" type="text" autocomplete="name" required></label>
+            <label>Company &amp; role<input name="role" type="text" autocomplete="organization-title" placeholder="e.g. Head of Analytics at Manychat"></label>
+            <label>Your bio<textarea name="bio" placeholder="2–3 sentences, third person. What you do, and what you'll share at the event."></textarea></label>
+            <div class="example">
+              <div class="tag">Bio example</div>
+              <p>"Melanie Mueller is a Product Manager for the in-house experimentation platform at Booking.com, where the central experimentation team supports 400 product teams running around 1,000 A/B tests at any given time. Originally a scientist, Melanie started at Booking.com as a data scientist running experiments for accommodation ranking and pricing, before moving into product ownership on the experimentation platform."</p>
+            </div>
+            <fieldset style="border:none;padding:0;margin:0;">
+              <legend style="font-size:14px;font-weight:600;margin-bottom:6px;">Can we use your LinkedIn profile photo?</legend>
+              <label style="font-weight:400;margin-bottom:8px;display:flex;gap:8px;align-items:center;"><input type="radio" name="photo" value="Yes, use my LinkedIn photo" checked> Yes, use my LinkedIn photo</label>
+              <label style="font-weight:400;display:flex;gap:8px;align-items:center;"><input type="radio" name="photo" value="No, I'll send a high-res one on WhatsApp"> No, I'll send a high-res one on WhatsApp</label>
+            </fieldset>
+            <button type="submit" class="btn btn-pink" style="border:none;cursor:pointer;">Submit</button>
+            <p class="cstatus" role="status" aria-live="polite"></p>
+          </form>
         </div>
       </div>
     </section>
   </main>
 
 <script>
-  // Paste your Google Form link here. Both buttons use it.
-  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfSvw2xM7rJTqROPik_JXZZOsdT2oZM_xv-nFDO0DShMkc-5w/viewform";
-
-  document.querySelectorAll('.form-link').forEach(function (a) {
-    if (FORM_URL.includes('YOUR_FORM_ID')) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        alert('Form link not set yet. Paste the Google Form link into FORM_URL in index.html.');
-      });
-    } else {
-      a.href = FORM_URL;
+  // Google Form is embedded: the site POSTs to Google's endpoint invisibly.
+  var GOOGLE_FORM = {
+    id: '1FAIpQLSfSvw2xM7rJTqROPik_JXZZOsdT2oZM_xv-nFDO0DShMkc-5w',
+    fields: {
+      name: 'entry.415123768',
+      role: 'entry.1003871138',
+      bio: 'entry.1329524774',
+      photo: 'entry.647609785'
     }
+  };
+
+  var f = document.querySelector('.cform');
+  var btn = f.querySelector('button[type="submit"]');
+  var status = f.querySelector('.cstatus');
+  var timer = null;
+
+  function say(msg, cls) {
+    clearTimeout(timer);
+    status.textContent = msg;
+    status.className = 'cstatus ' + (cls || '');
+  }
+
+  // Start clean on every page load (browsers restore cached copies).
+  window.addEventListener('pageshow', function () { f.reset(); say(''); });
+
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (GOOGLE_FORM.id.indexOf('PASTE') === 0) { say('The form is not connected yet.', 'err'); return; }
+
+    var data = new URLSearchParams();
+    Object.keys(GOOGLE_FORM.fields).forEach(function (k) {
+      var el = f.elements[k];
+      var v = el ? el.value.trim() : '';
+      data.append(GOOGLE_FORM.fields[k], v);
+    });
+
+    btn.disabled = true;
+    say('Sending…');
+
+    fetch('https://docs.google.com/forms/d/e/' + GOOGLE_FORM.id + '/formResponse', {
+      method: 'POST', mode: 'no-cors', body: data
+    })
+    .then(function () {
+      f.reset();
+      say("Thanks! We'll be in touch soon.", 'ok');
+      timer = setTimeout(function () { say(''); }, 10000);
+    })
+    .catch(function () {
+      btn.disabled = false;
+      say('Something went wrong. Please try again.', 'err');
+    });
   });
 </script>
 </body>
