@@ -48,11 +48,11 @@
   }
   .btn-pink { background: var(--pink); color: #fff; }
   .btn-pink:hover { background: var(--pink-deep); }
-  .hero { position: relative; overflow: hidden; }
+  .hero { position: relative; }
   .hero-inner { position: relative; z-index: 1; }
 
   /* Sparkles */
-  .sparkles { position: absolute; inset: 0; pointer-events: none; }
+  .sparkles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
   .sparkles span {
     position: absolute; color: #fff; opacity: 0; line-height: 1;
     animation: twinkle 3.2s ease-in-out infinite;
@@ -82,6 +82,8 @@
     background: #fff; border: 2px solid var(--pink); color: var(--pink);
     font-size: 18px; font-weight: 700; text-decoration: none; transition: background .15s, color .15s;
   }
+    .next[hidden] { display: none; }
+  .phase { scroll-margin-top: 24px; }
   .next:hover { background: var(--pink); color: #fff; }
   .inner { max-width: 760px; margin: 0 auto; }
   section h2 { font-size: 26px; letter-spacing: -0.01em; margin-bottom: 12px; }
@@ -100,6 +102,22 @@
     border-radius: 50%; background: var(--pink); color: #fff;
     font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center;
   }
+
+  /* Collapsible phases */
+  .phase-box { border: 1px solid var(--border); border-radius: 12px; background: #fff; margin-top: 12px; }
+  .phase-box summary.phase {
+    list-style: none; cursor: pointer; margin: 0; padding: 16px 18px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .phase-box summary::-webkit-details-marker { display: none; }
+  .phase-box summary:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; border-radius: 12px; }
+  .chev {
+    width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--pink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; line-height: 1; padding-bottom: 6px; transition: transform .2s;
+  }
+  .phase-box[open] .chev { transform: rotate(180deg); padding-bottom: 0; padding-top: 6px; }
+  .phase-box .steps { padding: 0 18px 4px; counter-reset: step; }
 
   /* Role chooser */
   .roles { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
@@ -149,6 +167,7 @@
       </div>
       <p class="promise">One minute to read, and you're all set.</p>
     </div>
+    <a class="next hero-next" href="#about" aria-label="Start reading" hidden><span class="arrow" aria-hidden="true">↓</span></a>
   </header>
 
   <main class="role-content" hidden>
@@ -168,44 +187,54 @@
         <div class="phases" data-for="speaker" style="counter-reset: step;">
           <p class="switch">For speakers. <button type="button" data-role="moderator">Moderating instead?</button></p>
 
-          <h3 class="phase">Before the event</h3>
-          <ol class="steps">
+          <details class="phase-box" open>
+            <summary class="phase">Before the event<span class="chev" aria-hidden="true">⌄</span></summary>
+            <ol class="steps">
             <li>We introduce you to our community on LinkedIn. We might ask you for a short bio and a photo for that.</li>
             <li>Share the event with your network. Your people are very welcome!</li>
             <li>We'll send you the panel questions early, so you have plenty of time to think them over.</li>
             <li>About 1–2 weeks before, we'll have a relaxed one-hour prep call with you, the moderator and one of us. We walk through your answers so you feel comfortable on the night.</li>
           </ol>
+          </details>
 
-          <h3 class="phase">On the day</h3>
-          <ol class="steps">
+          <details class="phase-box">
+            <summary class="phase">On the day<span class="chev" aria-hidden="true">⌄</span></summary>
+            <ol class="steps">
             <li>Come by at 18:00 so we can catch up and align on the topic before things start.</li>
             <li>Then it's panel time. No video recordings, so you can speak freely.</li>
             <li>Stay for drinks after the panel. It all happens in one evening.</li>
           </ol>
+          </details>
 
-          <h3 class="phase">After the event</h3>
-          <ol class="steps">
+          <details class="phase-box">
+            <summary class="phase">After the event<span class="chev" aria-hidden="true">⌄</span></summary>
+            <ol class="steps">
             <li>We write up the key takeaways for the community. You'll read it first, and we only publish after checking with you.</li>
           </ol>
+          </details>
         </div>
 
         <div class="phases" data-for="moderator" style="counter-reset: step;">
           <p class="switch">For moderators. <button type="button" data-role="speaker">Speaking instead?</button></p>
 
-          <h3 class="phase">Before the event</h3>
-          <ol class="steps">
+          <details class="phase-box" open>
+            <summary class="phase">Before the event<span class="chev" aria-hidden="true">⌄</span></summary>
+            <ol class="steps">
             <li>We introduce you to our community on LinkedIn. We might ask you for a short bio and a photo for that.</li>
             <li>Share the event with your network. Your people are very welcome!</li>
             <li>You shape the panel questions, and one of us is happy to brainstorm with you. We send them to the speakers early so they have time to prepare.</li>
             <li>About 1–2 weeks before, you join a one-hour call with each speaker separately. It's just you, the speaker and one of us. You go through their answers together and share feedback, so everyone feels ready.</li>
           </ol>
+          </details>
 
-          <h3 class="phase">On the day</h3>
-          <ol class="steps">
+          <details class="phase-box">
+            <summary class="phase">On the day<span class="chev" aria-hidden="true">⌄</span></summary>
+            <ol class="steps">
             <li>Come by at 18:00 so we can catch up and align on the topic before things start.</li>
             <li>Then you lead the panel. No video recordings, so everyone can speak freely.</li>
             <li>Stay for drinks after the panel. It all happens in one evening.</li>
           </ol>
+          </details>
         </div>
       </div>
     </section>
@@ -218,6 +247,7 @@
     var main = document.querySelector('main.role-content');
     function choose(role, scroll) {
       main.hidden = false;
+      document.querySelector('.hero-next').hidden = false;
       document.querySelectorAll('.role-btn').forEach(function (b) {
         b.setAttribute('aria-pressed', b.dataset.role === role ? 'true' : 'false');
       });
